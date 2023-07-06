@@ -27,7 +27,7 @@ contract ZkEVMWrapperTest is Test {
         external
         payable
     {
-        vm.assume(user != address(0) && etherAmount != 0);
+        vm.assume(user != address(0));
         vm.deal(user, etherAmount);
         console.log(user.balance);
         token.mint(user, tokenAmount);
@@ -44,7 +44,7 @@ contract ZkEVMWrapperTest is Test {
             privKey != 0 && privKey < 115792089237316195423570985008687907852837564279074904382605163141518161494337
         );
         address user = vm.addr(privKey);
-        vm.assume(user != address(0) && etherAmount != 0);
+        vm.assume(user != address(0));
         vm.deal(user, etherAmount);
         console.log(user.balance);
         token.mint(user, tokenAmount);

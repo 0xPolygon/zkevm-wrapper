@@ -17,7 +17,6 @@ contract ZkEVMWrapper {
     }
 
     function deposit(IERC20 token, uint256 amount, address destination) external payable {
-        require(msg.value != 0, "ZkEVMWrapper: no ETH sent");
         token.safeTransferFrom(msg.sender, address(this), amount);
         token.forceApprove(address(_zkEVMBridge), amount);
         _zkEVMBridge.bridgeAsset(
@@ -42,7 +41,6 @@ contract ZkEVMWrapper {
         external
         payable
     {
-        require(msg.value != 0, "ZkEVMWrapper: no ETH sent");
         IERC20Permit(address(token)).safePermit(msg.sender, address(this), amount, deadline, v, r, s);
         token.safeTransferFrom(msg.sender, address(this), amount);
         token.forceApprove(address(_zkEVMBridge), amount);
