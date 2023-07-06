@@ -28,7 +28,7 @@ contract ZkEVMWrapper {
             false, // forceUpdateGlobalExitRoot
             "" // permitData
         );
-        _zkEVMBridge.bridgeAsset(
+        _zkEVMBridge.bridgeAsset{value: msg.value}(
             1, // destinationNetwork
             destination,
             msg.value,
@@ -51,7 +51,7 @@ contract ZkEVMWrapper {
             false, // forceUpdateGlobalExitRoot
             "" // permitData
         );
-        _zkEVMBridge.bridgeAsset(
+        _zkEVMBridge.bridgeAsset{value: msg.value}(
             1, // destinationNetwork
             destination,
             msg.value,
