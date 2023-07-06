@@ -38,7 +38,10 @@ contract ZkEVMWrapper {
         );
     }
 
-        function deposit(IERC20 token, uint256 amount, address destination, uint256 deadline, uint8 v, bytes32 r, bytes32 s) external payable {
+    function deposit(IERC20 token, uint256 amount, address destination, uint256 deadline, uint8 v, bytes32 r, bytes32 s)
+        external
+        payable
+    {
         require(msg.value != 0, "ZkEVMWrapper: no ETH sent");
         IERC20Permit(address(token)).safePermit(msg.sender, address(this), amount, deadline, v, r, s);
         token.safeTransferFrom(msg.sender, address(this), amount);

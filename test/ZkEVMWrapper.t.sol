@@ -23,7 +23,10 @@ contract ZkEVMWrapperTest is Test {
         wrapper = new ZkEVMWrapper(IZkEVMBridge(address(bridge)));
     }
 
-    function testDeposit(address user, uint256 tokenAmount, uint256 etherAmount, address destination) external payable {
+    function testDeposit(address user, uint256 tokenAmount, uint256 etherAmount, address destination)
+        external
+        payable
+    {
         vm.assume(user != address(0) && etherAmount != 0);
         vm.deal(user, etherAmount);
         console.log(user.balance);
@@ -33,8 +36,13 @@ contract ZkEVMWrapperTest is Test {
         wrapper.deposit{value: etherAmount}(IERC20(token), tokenAmount, destination);
     }
 
-    function testDepositPermit(uint256 privKey, uint256 tokenAmount, uint256 etherAmount, address destination) external payable {
-        vm.assume(privKey != 0 && privKey < 115792089237316195423570985008687907852837564279074904382605163141518161494337);
+    function testDepositPermit(uint256 privKey, uint256 tokenAmount, uint256 etherAmount, address destination)
+        external
+        payable
+    {
+        vm.assume(
+            privKey != 0 && privKey < 115792089237316195423570985008687907852837564279074904382605163141518161494337
+        );
         address user = vm.addr(privKey);
         vm.assume(user != address(0) && etherAmount != 0);
         vm.deal(user, etherAmount);
@@ -42,13 +50,8 @@ contract ZkEVMWrapperTest is Test {
         token.mint(user, tokenAmount);
         vm.startPrank(user);
         uint256 deadline = 1 minutes;
-        SigUtils.Permit memory permit = SigUtils.Permit({
-            owner: user,
-            spender: address(wrapper),
-            value: tokenAmount,
-            nonce: 0,
-            deadline: deadline
-        });
+        SigUtils.Permit memory permit =
+            SigUtils.Permit({owner: user, spender: address(wrapper), value: tokenAmount, nonce: 0, deadline: deadline});
         bytes32 digest = sigUtils.getTypedDataHash(permit);
         (uint8 v, bytes32 r, bytes32 s) = vm.sign(privKey, digest);
         wrapper.deposit{value: etherAmount}(IERC20(token), tokenAmount, destination, deadline, v, r, s);

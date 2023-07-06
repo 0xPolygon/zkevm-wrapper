@@ -25,7 +25,7 @@ contract MockZkEVMBridge {
         address destinationAddress,
         uint256 amount,
         IERC20Metadata token,
-        bool /* forceUpdateGlobalExitRoot*/,
+        bool, /* forceUpdateGlobalExitRoot*/
         bytes calldata /* permitData */
     ) public payable {
         address originTokenAddress;
@@ -46,17 +46,9 @@ contract MockZkEVMBridge {
             if (msg.value != 0) {
                 revert();
             } else {
-                uint256 balanceBefore = IERC20Metadata(token).balanceOf(
-                    address(this)
-                );
-                IERC20Metadata(token).safeTransferFrom(
-                    msg.sender,
-                    address(this),
-                    amount
-                );
-                uint256 balanceAfter = IERC20Metadata(token).balanceOf(
-                    address(this)
-                );
+                uint256 balanceBefore = IERC20Metadata(token).balanceOf(address(this));
+                IERC20Metadata(token).safeTransferFrom(msg.sender, address(this), amount);
+                uint256 balanceAfter = IERC20Metadata(token).balanceOf(address(this));
 
                 // Override leafAmount with the received amount
                 leafAmount = balanceAfter - balanceBefore;
@@ -65,11 +57,7 @@ contract MockZkEVMBridge {
                 originNetwork = 0;
 
                 // Encode metadata
-                metadata = abi.encode(
-                    token.name(),
-                    token.symbol(),
-                    token.decimals()
-                );
+                metadata = abi.encode(token.name(), token.symbol(), token.decimals());
             }
         }
 
