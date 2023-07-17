@@ -6,6 +6,10 @@ import {IERC20Permit} from "openzeppelin-contracts/contracts/token/ERC20/extensi
 import {SafeERC20} from "openzeppelin-contracts/contracts/token/ERC20/utils/SafeERC20.sol";
 import {IZkEVMBridge} from "./IZkEVMBridge.sol";
 
+/// @title ZkEVMWrapper
+/// @author QEDK <qedk.en@gmail.com> (https://polygon.technology)
+/// @notice This contract is a wrapper for the zkEVM bridge allowing deposits of Ether and ERC20
+/// @custom:security security@polygon.technology
 contract ZkEVMWrapper {
     using SafeERC20 for IERC20;
     using SafeERC20 for IERC20Permit;
@@ -16,6 +20,10 @@ contract ZkEVMWrapper {
         _zkEVMBridge = zkEVMBridge_;
     }
 
+    /// @notice Bridge Ether and ERC20 to zkEVM using traditional approval
+    /// @param token Address of ERC20 token to deposit
+    /// @param amount Amount to deposit
+    /// @param destination The destination address on the zkEVM bridge
     function deposit(IERC20 token, uint256 amount, address destination) external payable {
         token.safeTransferFrom(msg.sender, address(this), amount);
         token.forceApprove(address(_zkEVMBridge), amount);
@@ -37,6 +45,10 @@ contract ZkEVMWrapper {
         );
     }
 
+    /// @notice Bridge Ether and ERC20 to zkEVM using permit
+    /// @param token Address of ERC20 token to deposit
+    /// @param amount Amount to deposit
+    /// @param destination The destination address on the zkEVM bridge
     function deposit(IERC20 token, uint256 amount, address destination, uint256 deadline, uint8 v, bytes32 r, bytes32 s)
         external
         payable
