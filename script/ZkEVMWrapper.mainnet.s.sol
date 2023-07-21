@@ -3,7 +3,7 @@ pragma solidity ^0.8.20;
 
 import "forge-std/Script.sol";
 import {ZkEVMWrapper} from "src/ZkEVMWrapper.sol";
-import {IZkEVMBridge} from "src/IZkEVMBridge.sol";
+import {IZkEVMBridge} from "src/interfaces/IZkEVMBridge.sol";
 
 contract ZkEVMWrapperDeploy is Script {
     function run() public {

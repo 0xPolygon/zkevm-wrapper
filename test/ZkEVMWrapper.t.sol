@@ -4,7 +4,7 @@ pragma solidity 0.8.20;
 import {MockERC20} from "src/mocks/MockERC20.sol";
 import {MockZkEVMBridge} from "src/mocks/MockZkEVMBridge.sol";
 import {ZkEVMWrapper} from "src/ZkEVMWrapper.sol";
-import {IZkEVMBridge} from "src/IZkEVMBridge.sol";
+import {IZkEVMBridge} from "src/interfaces/IZkEVMBridge.sol";
 import {IERC20} from "openzeppelin-contracts/contracts/token/ERC20/IERC20.sol";
 import {IERC20Permit} from "openzeppelin-contracts/contracts/token/ERC20/extensions/IERC20Permit.sol";
 import {SigUtils} from "./SigUtils.t.sol";
