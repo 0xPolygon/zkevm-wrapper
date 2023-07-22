@@ -55,7 +55,6 @@ contract ZkEVMWrapperTest is Test {
         address user = vm.addr(privKey);
         vm.assume(user != address(0) && deadline > 0 && etherAmount != 0);
         vm.deal(user, etherAmount);
-        console.log(user.balance);
         token.mint(user, tokenAmount);
         vm.startPrank(user);
         SigUtils.Permit memory permit =
