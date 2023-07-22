@@ -40,7 +40,9 @@ contract SigUtils {
     // computes the hash of a Dai permit
     function getDaiStructHash(DaiPermit memory _permit) internal pure returns (bytes32) {
         return keccak256(
-            abi.encode(DAI_PERMIT_TYPEHASH, _permit.holder, _permit.spender, _permit.nonce, _permit.expiry, _permit.allowed)
+            abi.encode(
+                DAI_PERMIT_TYPEHASH, _permit.holder, _permit.spender, _permit.nonce, _permit.expiry, _permit.allowed
+            )
         );
     }
 
