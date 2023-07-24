@@ -1,4 +1,4 @@
-# ZkEVM Wrapper
+# ZkEVM Wrapper [![test](https://github.com/0xPolygon/zkevm-wrapper/actions/workflows/test.yml/badge.svg)](https://github.com/0xPolygon/zkevm-wrapper/actions/workflows/test.yml)
 This repository contains the ZkEVM wrapper contracts that allows any user (including smart contracts) to transfer ETH and
 ERC20 tokens to ZkEVM in a single transaction.
 
